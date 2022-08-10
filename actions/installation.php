@@ -30,6 +30,26 @@ if(request() == 'POST')
         'route_path' => '*'
     ]);
 
+    $role = $db->insert('roles',[
+        'name' => 'suplier'
+    ]);
+
+    // create roles route
+    $db->insert('role_routes',[
+        'role_id' => $role->id,
+        'route_path' => 'default/*'
+    ]);
+    
+    $db->insert('role_routes',[
+        'role_id' => $role->id,
+        'route_path' => 'crud/index?table=pesanan'
+    ]);
+    
+    $db->insert('role_routes',[
+        'role_id' => $role->id,
+        'route_path' => 'crud/edit?table=pesanan'
+    ]);
+
     set_flash_msg(['success'=>'Instalasi Berhasil']);
     header('location:'.routeTo('auth/login'));
     die();
